@@ -1,0 +1,20 @@
+
+INSTALAÇÃO HASKELL NO UBUNTU
+
+> apt-get install haskell-stack
+
+--------
+
+No arquivo /home/<user>/.bashrc, acrescentar a linha
+export PATH=$PATH:/home/<user>/.local/bin
+(depois fechar e abrir um novo terminal)
+
+> stack new <nome-de-projeto>
+> cd nome-de-projeto
+> stack setup
+
+> stack install stylish-haskell
+> stack install ghc-mod
+> stack install hlint
+> apm install language-haskell haskell-ghc-mod ide-haskell-cabal \
+  ide-haskell autocomplete-haskell
