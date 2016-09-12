@@ -62,20 +62,27 @@ filter' = undefined
 -- stammer ['a', 'b', 'c', 'd']  >>> ['a', 'a', 'b', 'b', 'c', 'c', 'd', 'd']
 -- dica: usar o operador : (cons) duas vezes
 stammer :: [a] -> [a]
-stammer =  undefined
+stammer [] = []
+stammer (y:ys) = y:y:stammer ys
 
 -- listRef ['a', 'b', 'c', 'd', 'e'] 0 >>> 'a'
 -- listRef ['a', 'b', 'c', 'd', 'e'] 3 >>> 'd'
 -- dicas: na recursão, a lista e a posição devem "diminuir" juntas;
 --        lembre-se que o único elemento visível é o primeiro elemento
 listRef :: [a] -> Int -> a
-listRef = undefined
+listRef [] _ = undefined
+listRef (y:ys) x = if x == 0
+                   then y
+                   else listRef ys (x-1)
 
 -- listTail ['a', 'b', 'c', 'd', 'e'] 0 >>> ['a', 'b', 'c', 'd', 'e']
 -- listTail ['a', 'b', 'c', 'd', 'e'] 3 >>> ['d', 'e']
 -- dica: basta uma pequena modificação em listRef
 listTail :: [a] -> Int -> [a]
-listTail = undefined
+listTail [] _ = []
+listTail (y:ys) x = if x == 0
+                   then y:ys
+                   else listTail ys (x-1)
 
 -- alternate ['a', 'b', 'c', 'd', 'e', 'f'] >>> ['b', 'a', 'd', 'c', 'f', 'e']
 -- alternate ['a', 'b', 'c', 'd', 'e', 'f', 'g'] >>> ['b', 'a', 'd', 'c', 'f', 'e', 'g']
@@ -83,7 +90,9 @@ listTail = undefined
 --        na recursão, usar xs de x:y:xs faz a lista diminuir dois elementos
 --        inclua mais uma condição de parada para listas de um elemento [z]
 alternate :: [a] -> [a]
-alternate = undefined
+alternate [] = []
+alternate [z] = [z]
+alternate (x:y:xs) = y:x:alternate xs
 
 -- sorted [10, 13, 45] >>> True
 -- sorted [12, 15, 3, 20] >>> False
@@ -91,7 +100,11 @@ alternate = undefined
 -- dicas: acesse os dois primeiros elementos com x:y:xs
 --       chame a recursão reduzindo apenas um elemento, chamando y:xs
 sorted :: Ord a => [a] -> Bool
-sorted = undefined
+sorted [] = True
+sorted [_] = True
+sorted (x:y:xs) = if x <= y
+                  then sorted (y:xs)
+                  else False
 
 -- odds ['a', 'b', 'c', 'd', 'e', 'f'] >>> ['b', 'a', 'd', 'c', 'f', 'e']
 -- odds ['a', 'b', 'c', 'd', 'e', 'f', 'g'] >>> ['b', 'a', 'd', 'c', 'f', 'e', 'g']
@@ -103,7 +116,7 @@ odds = undefined
 -- dicas: crie uma função auxiliar que possui um parâmetro a mais
 --        sugestão do nome da função auxiliar -> unique'
 --        o parâmetro extra leva como informação qual elemento foi suprimido por último
---        a função auxiliar é a real função a resolver o problema
+--        a função auxiliar é a real   função a resolver o problema
 --        unique é uma fachada para a função auxilidar, menos carregada de informação
 --            para quem usa
 unique :: Eq a => [a] -> [a]
@@ -151,13 +164,8 @@ pairlis = undefined
 
 -- pos+ [7, 5, 1, 4]    >>> [7, 6, 3, 7]
 -- somar o elemento com sua posição
-pos+ :: [Int] -> [Int]
-pos+ = undefined
-
--- isSuffix [1, 2, 3] [4, 3, 2, 1, 2, 3]  >>> True
--- isSuffix [1, 2, 3] [4, 3, 2, 1, 2]   >>> False
-isSuffix ::[a] -> [a] -> [a]
-commonSuffix = undefined
+posPlus :: [Int] -> [Int]
+posPlus = undefined
 
 main :: IO ()
 main = putStrLn "blah"
