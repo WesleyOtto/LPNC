@@ -1,10 +1,10 @@
 
 ==================== FINAL INTERFACE ====================
-2016-09-05 23:06:02.704999 UTC
+2016-09-12 23:19:37.510925 UTC
 
 interface main@main:Main 7103
-  interface hash: a62d9334ad0435e8b9555030ae1d0b75
-  ABI hash: d9c9bb323d99ae2d4db2c3581be11000
+  interface hash: 1de115ef6539cd1546c872b67b3147f9
+  ABI hash: 081a0a37cfa76898f91fdd21c6508ca4
   export-list hash: bd6d83e7eb9d8c2fece6dbe850379b49
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
   flag hash: 10b492828cadfcb19cb0ded833846c96
@@ -58,17 +58,18 @@ import  -/  integer-gmp-1.0.0.0:GHC.Integer.Type 371e90fe753f08ddedf0d2657a9ef5c
 726672c17e5e1ba5d56c76890efc31cd
   $wlength' :: [a] -> GHC.Prim.Int#
   {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>, Inline: [0] -}
+35e30d0d3f74a85c5c4cc414dc2c93be
+  $wlistRef :: [a] -> GHC.Prim.Int# -> a
+  {- Arity: 2, Strictness: <S,1*U><S,1*U>, Inline: [0] -}
 85e7d86aba989bb81808fcd6a6ac963c
   allOdd :: GHC.Real.Integral a => [a] -> GHC.Types.Bool
   {- Arity: 1, Strictness: <B,A>b,
      Unfolding: InlineRule (1, True, True)
                 (\ @ a $dIntegral :: GHC.Real.Integral a ->
                  GHC.Err.undefined @ ([a] -> GHC.Types.Bool)) -}
-5b75ec250f5af4aa9b895950b67a1414
+8d08d6d93c51a10f0851704bee77627c
   alternate :: [a] -> [a]
-  {- Strictness: b,
-     Unfolding: InlineRule (0, True, True)
-                (\ @ a -> GHC.Err.undefined @ ([a] -> [a])) -}
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U> -}
 381264ca8746a9d57c5feed399348765
   andMap :: (a -> GHC.Types.Bool) -> [a] -> GHC.Types.Bool
   {- Strictness: b,
@@ -105,16 +106,15 @@ d4222e8321ab3d9aad6d850890caf824
      Unfolding: InlineRule (1, True, False)
                 (\ @ a w :: [a] ->
                  case Main.$wlength' @ a w of ww { DEFAULT -> GHC.Types.I# ww }) -}
-5c5dcf1984d226496ce87b029ccc7710
+b7b16bba74a643cfde6b281095eadc3a
   listRef :: [a] -> GHC.Types.Int -> a
-  {- Strictness: b,
-     Unfolding: InlineRule (0, True, True)
-                (\ @ a -> GHC.Err.undefined @ ([a] -> GHC.Types.Int -> a)) -}
-19fea6c95fc3c13e84455864903f455b
+  {- Arity: 2, Strictness: <S,1*U><S(S),1*U(1*U)>, Inline: INLINE[0],
+     Unfolding: InlineRule (2, True, False)
+                (\ @ a w :: [a] w1 :: GHC.Types.Int ->
+                 case w1 of ww { GHC.Types.I# ww1 -> Main.$wlistRef @ a w ww1 }) -}
+56abc45378f3971f04f79df3e3087b50
   listTail :: [a] -> GHC.Types.Int -> [a]
-  {- Strictness: b,
-     Unfolding: InlineRule (0, True, True)
-                (\ @ a -> GHC.Err.undefined @ ([a] -> GHC.Types.Int -> [a])) -}
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><L,1*U(1*U)> -}
 6cd48eba6f739e08f6e133937eac9413
   longest :: [[a]] -> [a]
   {- Strictness: b,
@@ -207,17 +207,13 @@ ab0f3daf7ef47d87b377adc0409aee13
                 (\ @ a ->
                  GHC.Err.undefined
                    @ ((a -> GHC.Types.Bool) -> [a] -> GHC.Types.Bool)) -}
-52220668e88371075c7f49fe6c3a8b32
+15c61512f1155bd3f6e30529d8f1704a
   sorted :: GHC.Classes.Ord a => [a] -> GHC.Types.Bool
-  {- Arity: 1, Strictness: <B,A>b,
-     Unfolding: InlineRule (1, True, True)
-                (\ @ a $dOrd :: GHC.Classes.Ord a ->
-                 GHC.Err.undefined @ ([a] -> GHC.Types.Bool)) -}
-96cb478929f1c3537b469da450b66704
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <L,U(A,A,A,C(C1(U)),A,A,A,A)><S,1*U> -}
+ade28c431b3eac89e9228dbf5378f594
   stammer :: [a] -> [a]
-  {- Strictness: b,
-     Unfolding: InlineRule (0, True, True)
-                (\ @ a -> GHC.Err.undefined @ ([a] -> [a])) -}
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U> -}
 b0dee80ed735915d6d8adcd386bbad51
   substitute :: GHC.Classes.Eq a => a -> a -> [a] -> [a]
   {- Arity: 1, Strictness: <B,A>b,

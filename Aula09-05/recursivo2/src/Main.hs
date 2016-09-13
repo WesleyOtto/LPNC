@@ -110,7 +110,9 @@ sorted (x:y:xs) = if x <= y
 -- odds ['a', 'b', 'c', 'd', 'e', 'f', 'g'] >>> ['b', 'a', 'd', 'c', 'f', 'e', 'g']
 -- dica: adapte alternate
 odds :: [a] -> [a]
-odds = undefined
+odds [] = []
+odds [z] = [z]
+odds (x:y:xs) = x:odds (xs)
 
 -- unique ['a', 'a', 'a', 'b', 'b', 'a', 'a', 'a', 'c', 'c'] >>> ['a', 'b', 'a', 'c']
 -- dicas: crie uma função auxiliar que possui um parâmetro a mais
@@ -119,8 +121,15 @@ odds = undefined
 --        a função auxiliar é a real   função a resolver o problema
 --        unique é uma fachada para a função auxilidar, menos carregada de informação
 --            para quem usa
+
+unique' :: Eq a => [a] -> a -> [a]
+unique' [] a = []
+unique' (x:xs) a = if x == a
+                   then unique' (xs) x
+                   else x:unique' (xs) x
+
 unique :: Eq a => [a] -> [a]
-unique = undefined
+unique (x:xs) = x:unique' (xs) x
 
 -- merge [2, 6, 18, 54] [1, 3, 9, 18, 27, 81]  >>> [1, 2, 3, 6, 9, 18, 18, 27, 54, 81]
 -- considere que as listas de entrada são ordenadas
