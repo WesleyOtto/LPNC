@@ -26,36 +26,45 @@ removeFirst x (y:ys) = if x == y
 -- allOdd [1, 7, 3, 17, 11, 2] >>> False
 -- Dica: existe o predicado odd; experimente odd 3  e odd 4
 allOdd :: Integral a => [a] -> Bool
-allOdd = undefined
-
+allOdd [] = True
+allOdd (y:ys) = if odd y
+                 then allOdd ys
+                else False
 -- andMap odd [1, 7, 3, 17, 11] >>> True
--- andMap even [2, 6, 10, 17, 0] >>> False
 -- Dica: é uma adaptação pontual de allOdd
 andMap :: (a -> Bool) -> [a] -> Bool
-andMap = undefined
-
+andMap f [] = True
+andMap f (y:ys) = if f y
+                   then andMap f ys
+                   else False
 -- some even [1, 7, 3, 17, 11] >>> False
 -- some odd [2, 10, 5] >>> True
 some :: (a -> Bool) -> [a] -> Bool
-some = undefined
-
+some f [] = False
+some f (y:ys) = if f y
+                 then True
+                 else some f ys
 -- sum [1, 7, 3, 17, 11]  >>> 39
 sum' :: Num a => [a] -> a
-sum' = undefined
-
+sum' [] = 0
+sum' (y:ys) = y + sum' ys
 -- count 'b' ['a', 'b', 'c', 'b', 'd', 'b', 'e'] >>> 3
 count :: Eq a => a -> [a] -> Integer
-count = undefined
-
+count _ [] = 0
+count x (y:ys) = if x == y
+                  then 1+count x ys
+                  else count x ys
 -- map' succ [10, 20, 30]  >>> [11, 21, 31]
 -- Dica: adapte twice
 map' :: (a -> b) -> [a] -> [b]
-map' = undefined
-
+map' f [] = []
+map' f (y:ys) = f y : map' f ys
 -- filter' odd [1, 2, 3, 4] >>> [1, 3]
 filter' :: (a -> Bool) -> [a] -> [a]
-filter' = undefined
-
+filter' f [] = []
+filter' f (y:ys) = if f y
+                    then y : filter' f ys
+                    else filter' f ys
 -- ==========
 --  2a parte
 
@@ -134,22 +143,35 @@ unique (x:xs) = x:unique' (xs) x
 -- merge [2, 6, 18, 54] [1, 3, 9, 18, 27, 81]  >>> [1, 2, 3, 6, 9, 18, 18, 27, 54, 81]
 -- considere que as listas de entrada são ordenadas
 merge :: (Ord a) => [a] -> [a] -> [a]
-merge = undefined
-
+merge [] [] = []
+merge xs[] = xs
+merge [] ys = ys
+merge (x:xs)(y:ys) = if x > y
+                     then y: merge (x:xs)(ys)
+                     else x:merge (xs)(y:ys)
 -- ==========
 --  3a parte
 
 -- max [1, 7, 3, 17, 11]  >>> 17
-max :: Ord a => [a] -> a
-max = undefined
+max' :: Ord a => [a] -> a
+max' [] = error "it doesn't have elemen"
+max' [x] = x
+max' (x:y:xs) = if x > y
+                then max'(x:xs)
+                else max'(y:xs)
 
 -- append [2, 6, 18, 54] [1, 3, 9, 18, 27, 81]  >>> [2, 6, 18, 54, 1, 3, 9, 18, 27, 81]
 append :: [a] -> [a] -> [a]
-append = undefined
+append [] [] = []
+append (x:xs)(y:ys) = x:xs ++ y:ys
+
 
 -- remq 'b' ['a', 'b', 'c', 'b', 'd', 'e' ] >>> ['a', 'c', 'd', 'e']
 remq :: Eq a => a -> [a] -> [a]
-remq = undefined
+remq _ [] = []
+remq x (y:ys) = if x == y
+                  then  remq x ys
+                  else y : remq x ys
 
 -- removeKFirst 'a' 2 ['x', 'y', 'a', 'z', 'w', 'a', 'f', 'g', 'a', 'p']  >>> ['x', 'y', 'z', 'w', 'f', 'g', 'a', 'p']
 removeKFirst :: Eq a => a -> Int -> [a] -> [a]
@@ -157,11 +179,14 @@ removeKFirst = undefined
 
 -- longest [[-1, 3], [10,11,12,13], [], [45,55]]  >>> [10, 11, 12, 13]
 longest :: [[a]] -> [a]
-longest = undefined
+longest [[]] = []
 
 -- firstOccurrence ['a', 'a', 'a', 'b', 'b', 'a', 'a', 'a', 'c', 'c']  >>> ['a', 'b', 'c']
 firstOccurrence :: Eq a => [a] -> [a]
-firstOccurrence = undefined
+firstOccurrence [] = []
+firstOccurrence (x:y:xs) = if x == y
+                         then x:firstOccurrence(xs)
+                         else x:y:firstOccurrence(xs) 
 
 -- substitute 'c' 'd' ['a', 'c', 'c', 'e']  >>> ['a', 'd', 'd', 'e']
 substitute :: Eq a => a -> a -> [a] -> [a]
@@ -174,7 +199,8 @@ pairlis = undefined
 -- pos+ [7, 5, 1, 4]    >>> [7, 6, 3, 7]
 -- somar o elemento com sua posição
 posPlus :: [Int] -> [Int]
-posPlus = undefined
+posPlus [] = []
+
 
 main :: IO ()
 main = putStrLn "blah"

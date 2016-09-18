@@ -16,11 +16,11 @@ version :: Version
 version = Version [0,1,0,0] []
 bindir, libdir, datadir, libexecdir, sysconfdir :: FilePath
 
-bindir     = "/home/bruno/Documentos/UNESP/LPNC/Aula09-05/recursivo2/.stack-work/install/x86_64-linux/lts-6.13/7.10.3/bin"
-libdir     = "/home/bruno/Documentos/UNESP/LPNC/Aula09-05/recursivo2/.stack-work/install/x86_64-linux/lts-6.13/7.10.3/lib/x86_64-linux-ghc-7.10.3/recursivo-0.1.0.0-1FIyA9JUK0UIwTRGFd6oA6"
-datadir    = "/home/bruno/Documentos/UNESP/LPNC/Aula09-05/recursivo2/.stack-work/install/x86_64-linux/lts-6.13/7.10.3/share/x86_64-linux-ghc-7.10.3/recursivo-0.1.0.0"
-libexecdir = "/home/bruno/Documentos/UNESP/LPNC/Aula09-05/recursivo2/.stack-work/install/x86_64-linux/lts-6.13/7.10.3/libexec"
-sysconfdir = "/home/bruno/Documentos/UNESP/LPNC/Aula09-05/recursivo2/.stack-work/install/x86_64-linux/lts-6.13/7.10.3/etc"
+bindir     = "/home/wesley/\193rea de Trabalho/Otto/Git/LPNC/Aula09-05/recursivo2/.stack-work/install/x86_64-linux/lts-6.13/7.10.3/bin"
+libdir     = "/home/wesley/\193rea de Trabalho/Otto/Git/LPNC/Aula09-05/recursivo2/.stack-work/install/x86_64-linux/lts-6.13/7.10.3/lib/x86_64-linux-ghc-7.10.3/recursivo-0.1.0.0-1FIyA9JUK0UIwTRGFd6oA6"
+datadir    = "/home/wesley/\193rea de Trabalho/Otto/Git/LPNC/Aula09-05/recursivo2/.stack-work/install/x86_64-linux/lts-6.13/7.10.3/share/x86_64-linux-ghc-7.10.3/recursivo-0.1.0.0"
+libexecdir = "/home/wesley/\193rea de Trabalho/Otto/Git/LPNC/Aula09-05/recursivo2/.stack-work/install/x86_64-linux/lts-6.13/7.10.3/libexec"
+sysconfdir = "/home/wesley/\193rea de Trabalho/Otto/Git/LPNC/Aula09-05/recursivo2/.stack-work/install/x86_64-linux/lts-6.13/7.10.3/etc"
 
 getBinDir, getLibDir, getDataDir, getLibexecDir, getSysconfDir :: IO FilePath
 getBinDir = catchIO (getEnv "recursivo_bindir") (\_ -> return bindir)
