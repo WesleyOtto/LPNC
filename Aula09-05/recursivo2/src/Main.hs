@@ -175,32 +175,43 @@ remq x (y:ys) = if x == y
 
 -- removeKFirst 'a' 2 ['x', 'y', 'a', 'z', 'w', 'a', 'f', 'g', 'a', 'p']  >>> ['x', 'y', 'z', 'w', 'f', 'g', 'a', 'p']
 removeKFirst :: Eq a => a -> Int -> [a] -> [a]
-removeKFirst = undefined
+removeKFirst _ _ [] = []
+removeKFirst x z (y:ys) = if z == 0
+                          then y:removeKFirst x z ys
+                          else if x == y
+                               then removeKFirst x (z-1) ys
+                               else y:removeKFirst x z ys
+
 
 -- longest [[-1, 3], [10,11,12,13], [], [45,55]]  >>> [10, 11, 12, 13]
 longest :: [[a]] -> [a]
 longest [[]] = []
 
 -- firstOccurrence ['a', 'a', 'a', 'b', 'b', 'a', 'a', 'a', 'c', 'c']  >>> ['a', 'b', 'c']
+-- Errado!!!
 firstOccurrence :: Eq a => [a] -> [a]
 firstOccurrence [] = []
 firstOccurrence (x:y:xs) = if x == y
-                         then x:firstOccurrence(xs)
-                         else x:y:firstOccurrence(xs) 
+                         then x: firstOccurrence(xs)
+                         else x: y: firstOccurrence(xs)
 
 -- substitute 'c' 'd' ['a', 'c', 'c', 'e']  >>> ['a', 'd', 'd', 'e']
 substitute :: Eq a => a -> a -> [a] -> [a]
-substitute = undefined
+substitute _ _ [] = []
+substitute z k (x:xs) = if x == z
+                        then k: substitute z k xs
+                        else x: substitute z k xs
 
 -- parlis [1, 2, 3] [11, 12, 13]  >>> [[1, 11], [2, 12], [3, 13]]
 pairlis :: [a] -> [a] -> [[a]]
-pairlis = undefined
+pairlis [] [] = [[]]
 
 -- pos+ [7, 5, 1, 4]    >>> [7, 6, 3, 7]
 -- somar o elemento com sua posição
-posPlus :: [Int] -> [Int]
-posPlus [] = []
-
+-- Inicia a com 0
+posPlus :: Int -> [Int] -> [Int]
+posPlus _ [] = []
+posPlus y (x:xs) = (x+y): posPlus (y+1) xs
 
 main :: IO ()
 main = putStrLn "blah"
